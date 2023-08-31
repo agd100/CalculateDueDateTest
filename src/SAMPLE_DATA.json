@@ -1,0 +1,66 @@
+{"issues":[
+	{
+		"title": "monitor nem kapcsol be",
+		"author_name": "balazs dezso",
+		"author_email": "balazsdezso@gmail.com",
+		"date": "CEST 2023-08-29 14:27",
+		"solvetime": 16,
+		"description": "probaltam bekapcsolni a szamitogepet, megnyomtam a gombot, a gep bekapcsolt de a monitor sotet maradt. a monitor lampaja eg de fekete a kepernyo. probaltam kihuzni a gepet es a monitort a konnektorbol, es ujra csatlakoztatni, de ez sem oldotta meg a problemat"
+	}
+	,
+	{
+		"title": "tapegyseg nem kapcsol be",
+		"author_name": "peter dezso",
+		"author_email": "peterdezso@gmail.com",
+		"date": "CEST 2023-08-29 16:54",
+		"solvetime": 34,
+		"description": "probaltam bekapcsolni a szamitogepet, megnyomtam a gombot, de nem kapcsol be a gep, egyik lampaja sem eg. probaltam kihuzni a gepet a konnektorbol, es ujra csatlakoztatni, de ez sem oldotta meg a problemat"
+	}
+	,
+	{
+		"title": "nincs internetkapcsolat",
+		"author_name": "dunai laszlo",
+		"author_email": "dunailaszlo@gmail.com",
+		"date": "CEST 2023-08-29 17:54",
+		"solvetime": 12,
+		"description": "bekapcsoltam a szamitogepet, elindult a windows, csatlakoztam a wifihez, de nincs internet. probaltam kikapcsolni a routert es ujra bekapcsolni, de ez sem oldotta meg a problemat"
+	}
+	,
+	{
+		"title": "termek rendeles nem mukodik",
+		"author_name": "szegedi krisztina",
+		"author_email": "szegedikrisztina@gmail.com",
+		"date": "CEST 2023-08-29 19:57",
+		"solvetime": 6,
+		"description": "felmentem a ceges weboldalra, raktattintottam egy termekre (termek kod: TERM1524), a kosarba raktam a termeket, raktattintottam a fizetes gombra. megjelent egy urlap ahol kitolthetem a nevemet, a cimemet es a bankkartyaszamomat. kitoltottam az urlapot es a \"Tovabb\" gombra kattintottam. ekkor megjelent egy hibauzenet: HIBA142"
+	}
+	,
+	{
+		"title": "mas szinu termek erkezett mint amit rendeltem",
+		"author_name": "gerelyi norbert",
+		"author_email": "gerelyinorbert@gmail.com",
+		"date": "CEST 2023-08-30 07:57",
+		"solvetime": 6,
+		"description": "Tisztelt Ugyfelszolgalat! Mult heten rendeltem egy termeket (termek kod: TERM1535, rendeles azonosito: REND76323), a weboldalon egyertelmuen bejeloltem, hogy Piros szinu valtozatban kerem a termeket, es ezt a weboldalon a \"Rendeles Kovetese\" menupontban is Piros-kent jelezte a rendszer, es a visszaigazolo email-ben is a szin-nel Piros szin szerepelt, megis amikor megkaptam ma a termeket, Sarga szinut kaptam. Szeretnem visszakuldeni es egy Piros szinure cserelni. Udvozlettel, Gerelyi Norbert"
+	}
+	,
+	{
+		"title": "paypal fizetes nem mukodik",
+		"author_name": "zalai marton",
+		"author_email": "zalaimarton@gmail.com",
+		"date": "CEST 2023-08-30 10:11",
+		"solvetime": 16,
+		"description": "megprobaltam ma a Paypal fizetest hasznalni a kosarban levo termekek kifizetesere, de amikor beirtam a paypal-os email cimemet a mezobe es a \"Tovabb\" gombra kattintottam, hibauzenetet irt ki: HIBA3413"
+	}
+	,
+	{
+		"title": "szeretnek leiratkozni a levelzo listarol",
+		"author_name": "wolf jozsef",
+		"author_email": "wolf jozsef@gmail.com",
+		"date": "CEST 2023-08-30 13:51",
+		"solvetime": 8,
+		"description": "Tisztelt Ugyfelszolgalat! Tul sok az email mennyiseg amit kudlenek, napi 3-4 emailt is kapok onoktol minden nap, ezert szeretnek leiratkzoni a levelezo listarol. Koszonettel, Wolf Jozsef"
+	}
+
+]}
+
