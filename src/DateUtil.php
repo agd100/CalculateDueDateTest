@@ -68,11 +68,26 @@ class DateUtil
 		return $p;
 	}
 
+	public function is_during_working_hours ($date_str_or_p)
+	{
+		if (is_string ($date_str_or_p))
+		{
+			$p = $this->parse ($date_str_or_p);
+		}
+		else
+		{
+			$p = $date_str_or_p;
+		}
+
+		return $this->is_working_day ($p) && !$this->is_before_work ($p) && !$this->is_after_work ($p);
+	}
+
+
 	protected function is_after_work ($p)
 	{
 		$CLOSE_H = $this->get_close_hour ();
 		$CLOSE_M = $this->get_close_minute ();
-		$after_work = ($p->_hour > $CLOSE_H) || (($p->_hour == $CLOSE_H) && ($p->_minute > $CLOSE_M));
+		$after_work = ($p->_hour > $CLOSE_H) || (($p->_hour == $CLOSE_H) && ($p->_minute >= $CLOSE_M));
 		return $after_work;
 	}
 	protected function is_before_work ($p)
@@ -89,12 +104,6 @@ class DateUtil
 		return $working_day;
 	}
 
-	public function is_during_working_hours ($date_str)
-	{
-		$p = $this->parse ($date_str);
-
-		return $this->is_working_day ($p) && !$this->is_before_work ($p) && !$this->is_after_work ($p);
-	}
 
 	protected function get_open_hour ()
 	{
@@ -116,12 +125,13 @@ class DateUtil
 	{
 		$p = $parseddate;
 		$w = $this->work_saturdays;
-		$have_year = isset ($w[$p->_year]);
-		if ($have_year)
+		$year = $p->_year;
+		$have_year = in_array ($year, array_keys ($w));
+		if (!$have_year)
 		{
 			return false;
 		}
-		return in_array ($p->_weeknum, $w[$p->_year]);
+		return in_array ($p->_weeknum, $w[$year]);
 	}
 
 	# creates new parseddate instance
