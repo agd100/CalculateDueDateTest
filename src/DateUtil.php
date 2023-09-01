@@ -27,13 +27,8 @@ class DateUtil
 
 	public function parse ($src)
 	{
-		#$pieces = explode ($src, ' ', 2);
-		#$tz = new DateTimeZone ($pieces[0]);
-		
-		#$date = date_parse ($src);
 		$date = new DateTime ($src);
 
-		#$ts = strtotime ($src);
 		$result = new stdClass ();
 		$result->ts = (int)$date->format ('U');
 		$result->formatted = $this->get_formatted ($date);

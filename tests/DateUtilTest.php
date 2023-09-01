@@ -115,6 +115,11 @@ class DateUtilTest extends TestCase
 		$this->assertSame($is_aw?1:0, $expected[$IS_AFTERWORK]);
 		$this->assertSame($is_sw?1:0, $expected[$IS_SATURDAYWORK]);
 
+		$this->assertSame($workhours[0], $d->_get_open_hour());
+		$this->assertSame($workhours[1], $d->_get_open_minute());
+		$this->assertSame($workhours[2], $d->_get_close_hour());
+		$this->assertSame($workhours[3], $d->_get_close_minute());
+
 		if ($expected[$IS_WORKTIME])
 		{
 			$this->assertTrue($d->is_during_working_hours ($p->formatted));
