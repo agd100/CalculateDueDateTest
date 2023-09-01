@@ -8,6 +8,8 @@ use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
 
 
+require_once ('TimeSpender.php');
+
 require_once ('DateUtil.php');
 
 
@@ -100,6 +102,8 @@ class DateUtilTest extends TestCase
 		$IS_BEFOREWORK = 4;
 		$IS_AFTERWORK = 5;
 		$IS_SATURDAYWORK = 6;
+		$HOURS_TO_WORK_END = 7;
+		$MINUTES_TO_WORK_END = 8;
 
 		$this->assertSame($p->_weeknum, $expected[$WEEKNUM]);
 
@@ -123,10 +127,19 @@ class DateUtilTest extends TestCase
 		if ($expected[$IS_WORKTIME])
 		{
 			$this->assertTrue($d->is_during_working_hours ($p->formatted));
+
+			$hours_exp = $expected[$HOURS_TO_WORK_END];
+			$minutes_exp = $expected[$MINUTES_TO_WORK_END];
+
+			$t = $d->remaining_work_time ($p);
+			$this->assertSame ($t->h, $hours_exp, $t->m, $minutes_exp);
 		}
 		else # not worktime
 		{
 			$this->assertFalse($d->is_during_working_hours ($p->formatted));
+
+			$t = $d->remaining_work_time ($p);
+			$this->assertTrue ($t->zero ());
 		}
 	}
 
@@ -174,14 +187,17 @@ class DateUtilTest extends TestCase
 	public static function workSatTestProvider ()
 	{
 		return [
-			'dataset 1' => ['CEST 2023-09-01 16:27', [1, '', 35, 1, 0, 0, 1]],
-			'dataset 2' => ['CEST 2023-09-01 17:27', [0, 'CEST 2023-09-02 09:00', 35, 1, 0, 1, 1]],
-			'dataset 3' => ['CEST 2023-09-02 16:59', [1, '', 35, 1, 0, 0, 1]],
-			'dataset 4' => ['CEST 2023-09-02 17:00', [0, 'CEST 2023-09-04 09:00', 35, 1, 0, 1, 1]],
-			'dataset 5' => ['CEST 2023-09-03 14:00', [0, 'CEST 2023-09-04 09:00', 35, 0, 0, 0, 1]],
-			'dataset 6' => ['CEST 2023-09-15 16:45', [1, '', 37, 1, 0, 0, 0]],
-			'dataset 7' => ['CEST 2023-09-15 17:00', [0, 'CEST 2023-09-18 09:00', 37, 1, 0, 1, 0]],
-			'dataset 8' => ['CEST 2023-09-18 08:12', [0, 'CEST 2023-09-18 09:00', 38, 1, 1, 0, 0]],
+			'dataset 1' => ['CEST 2023-09-01 16:27', [1, '', 35, 1, 0, 0, 1,  0, 33]],
+			'dataset 2' => ['CEST 2023-09-01 17:27', [0, 'CEST 2023-09-02 09:00', 35, 1, 0, 1, 1,  0, 0]],
+			'dataset 3' => ['CEST 2023-09-02 16:59', [1, '', 35, 1, 0, 0, 1,  0, 1]],
+			'dataset 4' => ['CEST 2023-09-02 17:00', [0, 'CEST 2023-09-04 09:00', 35, 1, 0, 1, 1,  0, 0]],
+			'dataset 5' => ['CEST 2023-09-03 14:00', [0, 'CEST 2023-09-04 09:00', 35, 0, 0, 0, 1,  0, 0]],
+			'dataset 6' => ['CEST 2023-09-15 16:45', [1, '', 37, 1, 0, 0, 0,  0, 15]],
+			'dataset 7' => ['CEST 2023-09-15 17:00', [0, 'CEST 2023-09-18 09:00', 37, 1, 0, 1, 0,  0, 0]],
+			'dataset 8' => ['CEST 2023-09-18 08:12', [0, 'CEST 2023-09-18 09:00', 38, 1, 1, 0, 0,  0, 0]],
+			'dataset 9' => ['CEST 2023-09-18 08:59', [0, 'CEST 2023-09-18 09:00', 38, 1, 1, 0, 0,  0, 0]],
+			'dataset 10'=> ['CEST 2023-09-18 09:00', [1, 'CEST 2023-09-18 09:00', 38, 1, 0, 0, 0,  8, 0]],
+			'dataset 11'=> ['CEST 2023-09-18 09:30', [1, 'CEST 2023-09-18 09:00', 38, 1, 0, 0, 0,  7, 30]],
 		];
 	}
 }

@@ -15,3 +15,4 @@ define ('WORK_CLOSE_MINUTE', 3); # array indexes
 # %W   week number of year, with Monday as first day of week (00..53)
 define ('WORKING_SATURDAYS', [2023 => [34, 35, 36]]);
 
+

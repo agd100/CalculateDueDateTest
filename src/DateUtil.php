@@ -2,6 +2,8 @@
 
 require_once ('common.php');
 
+require_once ('TimeSpender.php');
+
 
 class UnexpectedStateException extends Exception {}
 
@@ -46,9 +48,19 @@ class DateUtil
 		return $result;
 	}
 
-	public function to_work_hours ($src)
+	public function to_work_hours ($date_str_or_p)
 	{
-		$p = $this->parse ($src);
+		#$p = $this->parse ($src);
+		
+		if (is_string ($date_str_or_p))
+		{
+			$p = $this->parse ($date_str_or_p);
+		}
+		else
+		{
+			$p = $date_str_or_p;
+		}
+
 
 		if (!$this->is_working_day ($p) || $this->is_after_work ($p))
 		{
@@ -63,6 +75,30 @@ class DateUtil
 		return $p;
 	}
 
+
+	# returns a TimeSpender object
+	public function remaining_work_time ($p)
+	{
+		$t = new TimeSpender (0, 0);
+		if (!$this->is_during_working_hours ($p))
+		{
+			return $t;
+		}
+
+		$end_dt = clone $p->dateTime;
+		$ch = $this->get_close_hour ();
+		$cm = $this->get_close_minute ();
+		$end_dt->setTime ($ch, $cm);
+		$end_p = $this->parse ($this->get_formatted ($end_dt));
+
+		$diff = $p->dateTime->diff ($end_p->dateTime);
+		$t->h = $diff->h;
+		$t->m = $diff->i;
+
+		return $t;
+	}
+
+
 	public function is_during_working_hours ($date_str_or_p)
 	{
 		if (is_string ($date_str_or_p))
@@ -75,6 +111,13 @@ class DateUtil
 		}
 
 		return $this->is_working_day ($p) && !$this->is_before_work ($p) && !$this->is_after_work ($p);
+	}
+
+
+	public function fromDateTime ($dt)
+	{
+		$p = $this->parse ($this->get_formatted ($dt));
+		return $p;
 	}
 
 

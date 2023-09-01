@@ -55,22 +55,27 @@ class NormalizeIssueReportDatesTest extends DataFilesTestCase
 	{
 		$alldatasets = self::dataFileProvider (); 
 		$filenames = array_values ($alldatasets);
-		$firstdataset = array_shift ($filenames);
-		$datafile = $firstdataset[0];
-
-		$p = new InputParser ();
-		$data = $p->parseInputFile ($datafile);
-
-		$n = new NormalizeIssueReportDates ();
-		$data = $n->normalize_dates ($data);
 
 		$dates_ds = array ();
-		$i = -1;
-		foreach ($data->issues as $issue)
+
+		for ($j = 0, $jmax = count ($filenames); $j < $jmax; $j++)
 		{
-			$i++;
-			$key = 'data with normalized dates from ' . $datafile . ", #$i";
-			$dates_ds[$key] = array ($issue);
+			$datafilearray = array_shift ($filenames);
+			$datafile = $datafilearray[0];
+	
+			$p = new InputParser ();
+			$data = $p->parseInputFile ($datafile);
+	
+			$n = new NormalizeIssueReportDates ();
+			$data = $n->normalize_dates ($data);
+	
+			$i = -1;
+			foreach ($data->issues as $issue)
+			{
+				$i++;
+				$key = 'data with normalized dates from ' . $datafile . ", #$i";
+				$dates_ds[$key] = array ($issue);
+			}
 		}
 
 		return $dates_ds;
